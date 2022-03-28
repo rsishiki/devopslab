@@ -21,7 +21,7 @@ jobs:
           python-version: '3.10'
 
       - name: Install Requirements
-        run: pip install -r requirements.txt
+        run:  pip install flask
 
       - name: Unit Test
         run: python -m unittest -v test
@@ -46,6 +46,10 @@ jobs:
       steps: 
         - name: Checkout Repo
           uses: actions/checkout@v2
+
+       - name: New Relic License
+          run: |
+             sed -i "s/licensekey/${{ secrets.NEW_RELIC_LICENSE_KEY }}/g" Dockerfile
 
         - name: Login to Heroku Container registry
           env: 
